@@ -1,22 +1,55 @@
+/* eslint-disable no-console */
 import mongoose from 'mongoose';
+import config from './config/index';
 import app from './app';
-import config from './config';
+import { Server } from 'http';
 
-const port = config.port || 5000; // Default port to 5000 if not provided
-const mongoDatabaseString = config.database_url;
+process.on('uncaughtException', error => {
+  console.error('Uncaught Exception detected', error);
+  process.exit(1);
+});
+
+let server: Server;
 
 async function main() {
   try {
-    await mongoose.connect(mongoDatabaseString as string);
-    console.log('Database is connected successfully');
+    await mongoose.connect(config.database_url as string);
+    console.info(`🛢Database is connected successfully`);
 
-    app.listen(port, () => {
-      console.log(`Algonauts is listening on port ${port}`);
+    server = app.listen(config.port, () => {
+      console.info(`Application listening on port ${config.port}`);
     });
-  } catch (error) {
-    console.error('Failed to connect to database or start server:', error);
-    process.exit(1); // Exit process with failure
+  } catch (err) {
+    console.error('Failed to connect to MongoDB', err);
+    process.exit(1); // Exit process if unable to connect to database
   }
 }
 
-main();
+// Ensure main is called immediately
+main().catch(err => {
+  console.error('Error in main function', err);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', error => {
+  console.error('Unhandled Rejection detected', error);
+  if (server) {
+    server.close(() => {
+      process.exit(1);
+    });
+  } else {
+    process.exit(1);
+  }
+});
+
+process.on('SIGTERM', () => {
+  console.info('SIGTERM is received');
+  if (server) {
+    server.close(() => {
+      console.info('Server closed due to SIGTERM');
+      process.exit(0);
+    });
+  } else {
+    process.exit(0);
+  }
+});

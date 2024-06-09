@@ -1,0 +1,43 @@
+import { Secret } from 'jsonwebtoken';
+import config from '../../../config';
+import { ILoginUser, ILoginUserResponse } from './auth.interface';
+import { User } from '../users/user.model';
+import { jwtHelpers } from '../../../helpers/jwtHelpers';
+
+const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
+  const { email, password } = payload;
+
+  // Find user by email
+  const foundUser = await User.findOne({ email });
+
+  if (!foundUser) {
+    throw new Error('Failed to find user');
+  }
+
+  // Check if the password matches
+  if (password !== foundUser.password) {
+    throw new Error('Password does not match');
+  }
+
+  const { _id, type } = foundUser;
+  const token = jwtHelpers.createToken(
+    { _id, type },
+    config.jwt.secret as Secret,
+    config.jwt.expires_in as string,
+  );
+
+  const refreshToken = jwtHelpers.createToken(
+    { _id, type },
+    config.jwt.refresh_secret as Secret,
+    config.jwt.refresh_expires_in as string,
+  );
+
+  return {
+    token,
+    refreshToken,
+  };
+};
+
+export const AuthService = {
+  loginUser,
+};
