@@ -1,9 +1,9 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
-// import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import routes from './app/routes';
 import httpStatus from 'http-status';
 import cookieParser from 'cookie-parser';
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
 
 const app: Application = express();
 
@@ -38,6 +38,6 @@ app.use((req: Request, res: Response) => {
   });
 });
 
-// app.use(globalErrorHandler);
+app.use(globalErrorHandler);
 
 export default app;
