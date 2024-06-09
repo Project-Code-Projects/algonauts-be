@@ -14,9 +14,9 @@ const moduleRoutes = [
     route: AuthRoutes,
   },
   {
-    path:'/post',
+    path: '/post',
     route: PostRoutes,
-  }
+  },
 ];
 
 moduleRoutes.forEach(route => router.use(route.path, route.route));

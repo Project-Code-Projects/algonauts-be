@@ -77,5 +77,5 @@ export const PostController = {
   deletePost,
   getPostById,
   getAllPosts,
-  getPostsByAuthor
+  getPostsByAuthor,
 };

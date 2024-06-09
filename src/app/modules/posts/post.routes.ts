@@ -10,5 +10,4 @@ router.get('/post/:id', PostController.getPostById);
 router.get('/posts', PostController.getAllPosts);
 router.get('/posts/author/:authorId', PostController.getPostsByAuthor);
 
-
-export const PostRoutes =  router;
+export const PostRoutes = router;

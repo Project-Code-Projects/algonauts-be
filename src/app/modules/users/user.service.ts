@@ -6,8 +6,13 @@ const createUser = async (userData: IUser): Promise<IUser> => {
   return newUser;
 };
 
-const updateUser = async (id: string, userData: Partial<IUser>): Promise<IUser | null> => {
-  const updatedUser = await User.findByIdAndUpdate(id, userData, { new: true }).exec();
+const updateUser = async (
+  id: string,
+  userData: Partial<IUser>,
+): Promise<IUser | null> => {
+  const updatedUser = await User.findByIdAndUpdate(id, userData, {
+    new: true,
+  }).exec();
   if (!updatedUser) {
     throw new Error('User not found');
   }
@@ -42,4 +47,3 @@ export const UserService = {
   getUserById,
   getAllUsers,
 };
-

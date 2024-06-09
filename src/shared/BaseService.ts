@@ -20,7 +20,9 @@ class BaseService<T extends Document> {
   }
 
   async update(id: string, item: Partial<T>): Promise<T | null> {
-    const updatedItem = await this.model.findByIdAndUpdate(id, item, { new: true }).exec();
+    const updatedItem = await this.model
+      .findByIdAndUpdate(id, item, { new: true })
+      .exec();
     if (!updatedItem) {
       throw new Error(`${this.model.modelName} not found`);
     }
@@ -49,7 +51,10 @@ class BaseService<T extends Document> {
     return item;
   }
 
-  async getAll(queryOptions: QueryOptions = {}, populateOptions?: string[]): Promise<T[]> {
+  async getAll(
+    queryOptions: QueryOptions = {},
+    populateOptions?: string[],
+  ): Promise<T[]> {
     let query = this.model.find(queryOptions);
     if (populateOptions) {
       populateOptions.forEach(option => {

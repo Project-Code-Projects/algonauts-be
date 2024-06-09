@@ -9,7 +9,10 @@ class PostService extends BaseService<IPost> {
   }
 
   async getPostsByAuthor(authorId: string): Promise<IPost[]> {
-    const posts = await this.model.find({ authorId }).populate('authorId').exec();
+    const posts = await this.model
+      .find({ authorId })
+      .populate('authorId')
+      .exec();
     return posts;
   }
 }

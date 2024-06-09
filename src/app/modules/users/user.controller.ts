@@ -59,7 +59,6 @@ const getAllUsers = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-
 export const UserController = {
   createUser,
   updateUser,
@@ -67,5 +66,3 @@ export const UserController = {
   getUserById,
   getAllUsers,
 };
-
-
