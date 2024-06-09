@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Document, Model, ObjectId } from 'mongoose';
 
-
 export enum ParentMeetingStatus {
   active = 'active',
   inActive = 'inactive',

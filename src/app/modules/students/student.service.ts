@@ -8,7 +8,11 @@ class StudentService extends BaseService<IStudent> {
   }
 
   async getStudentsByParent(parentId: string): Promise<IStudent[]> {
-    const students = await this.model.find({ parentId }).populate('userId').populate('parentId').exec();
+    const students = await this.model
+      .find({ parentId })
+      .populate('userId')
+      .populate('parentId')
+      .exec();
     return students;
   }
 }

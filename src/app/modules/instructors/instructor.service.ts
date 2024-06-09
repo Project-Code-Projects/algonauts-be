@@ -7,8 +7,13 @@ class InstructorService {
     return newItem;
   }
 
-  async update(id: string, item: Partial<IInstructor>): Promise<IInstructor | null> {
-    const updatedItem = await Instructor.findByIdAndUpdate(id, item, { new: true }).exec();
+  async update(
+    id: string,
+    item: Partial<IInstructor>,
+  ): Promise<IInstructor | null> {
+    const updatedItem = await Instructor.findByIdAndUpdate(id, item, {
+      new: true,
+    }).exec();
     if (!updatedItem) {
       throw new Error(`${Instructor.modelName} not found`);
     }
@@ -37,7 +42,9 @@ class InstructorService {
   }
 
   async getInstructorsByUser(userId: string): Promise<IInstructor[]> {
-    const instructors = await Instructor.find({ userId }).populate('userId').exec();
+    const instructors = await Instructor.find({ userId })
+      .populate('userId')
+      .exec();
     return instructors;
   }
 }

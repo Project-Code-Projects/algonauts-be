@@ -1,5 +1,9 @@
 import { Schema, model } from 'mongoose';
-import { IParentMeeting, ParentMeetingModel, ParentMeetingStatus } from './parentMeeting.interface';
+import {
+  IParentMeeting,
+  ParentMeetingModel,
+  ParentMeetingStatus,
+} from './parentMeeting.interface';
 
 const ParentMeetingSchema = new Schema<IParentMeeting, ParentMeetingModel>(
   {
@@ -36,4 +40,7 @@ const ParentMeetingSchema = new Schema<IParentMeeting, ParentMeetingModel>(
   },
 );
 
-export const ParentMeeting = model<IParentMeeting, ParentMeetingModel>('ParentMeeting', ParentMeetingSchema);
+export const ParentMeeting = model<IParentMeeting, ParentMeetingModel>(
+  'ParentMeeting',
+  ParentMeetingSchema,
+);

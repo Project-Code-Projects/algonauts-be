@@ -34,8 +34,8 @@ const moduleRoutes = [
     route: CommentRoutes,
   },
   {
-    path:'/parent',
-    route: ParentRoutes
+    path: '/parent',
+    route: ParentRoutes,
   },
   {
     path: '/student',
@@ -52,7 +52,7 @@ const moduleRoutes = [
   {
     path: '/parent-meeting',
     route: ParentMeetingRoutes,
-  }
+  },
 ];
 
 moduleRoutes.forEach(route => router.use(route.path, route.route));

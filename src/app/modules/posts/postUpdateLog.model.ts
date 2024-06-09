@@ -18,4 +18,7 @@ const PostUpdateLogSchema = new Schema<IPostUpdateLog, PostUpdateModel>(
   },
 );
 
-export const PostUpdateLog = model<IPostUpdateLog, PostUpdateModel>('PostUpdateLog', PostUpdateLogSchema);
+export const PostUpdateLog = model<IPostUpdateLog, PostUpdateModel>(
+  'PostUpdateLog',
+  PostUpdateLogSchema,
+);

@@ -49,27 +49,32 @@ const getHelpRequestById = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const getHelpRequestsByStudent = catchAsync(async (req: Request, res: Response) => {
-  const studentId = req.params.studentId;
-  const result = await helpRequestService.getHelpRequestsByStudent(studentId);
+const getHelpRequestsByStudent = catchAsync(
+  async (req: Request, res: Response) => {
+    const studentId = req.params.studentId;
+    const result = await helpRequestService.getHelpRequestsByStudent(studentId);
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    data: result,
-  });
-});
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      data: result,
+    });
+  },
+);
 
-const getHelpRequestsByInstructor = catchAsync(async (req: Request, res: Response) => {
-  const instructorId = req.params.instructorId;
-  const result = await helpRequestService.getHelpRequestsByInstructor(instructorId);
+const getHelpRequestsByInstructor = catchAsync(
+  async (req: Request, res: Response) => {
+    const instructorId = req.params.instructorId;
+    const result =
+      await helpRequestService.getHelpRequestsByInstructor(instructorId);
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    data: result,
-  });
-});
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      data: result,
+    });
+  },
+);
 
 const getAllHelpRequests = catchAsync(async (req: Request, res: Response) => {
   const result = await helpRequestService.getAll();

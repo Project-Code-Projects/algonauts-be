@@ -8,7 +8,11 @@ class CommentService extends BaseService<IComment> {
   }
 
   async getCommentsByPost(postId: string): Promise<IComment[]> {
-    const comments = await this.model.find({ postId }).populate('postId').populate('userId').exec();
+    const comments = await this.model
+      .find({ postId })
+      .populate('postId')
+      .populate('userId')
+      .exec();
     return comments;
   }
 }

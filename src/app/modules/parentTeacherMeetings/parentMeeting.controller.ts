@@ -60,16 +60,19 @@ const getMeetingsByParent = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const getMeetingsByInstructor = catchAsync(async (req: Request, res: Response) => {
-  const instructorId = req.params.instructorId;
-  const result = await parentMeetingService.getMeetingsByInstructor(instructorId);
+const getMeetingsByInstructor = catchAsync(
+  async (req: Request, res: Response) => {
+    const instructorId = req.params.instructorId;
+    const result =
+      await parentMeetingService.getMeetingsByInstructor(instructorId);
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    data: result,
-  });
-});
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      data: result,
+    });
+  },
+);
 
 const getAllParentMeetings = catchAsync(async (req: Request, res: Response) => {
   const result = await parentMeetingService.getAll();

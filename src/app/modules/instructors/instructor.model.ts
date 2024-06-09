@@ -14,4 +14,7 @@ const InstructorSchema = new Schema<IInstructor, InstructorModel>(
   },
 );
 
-export const Instructor = model<IInstructor, InstructorModel>('Instructor', InstructorSchema);
+export const Instructor = model<IInstructor, InstructorModel>(
+  'Instructor',
+  InstructorSchema,
+);

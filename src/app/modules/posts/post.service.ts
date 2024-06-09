@@ -19,11 +19,13 @@ class PostService extends BaseService<IPost> {
   }
 
   async update(id: string, item: Partial<IPost>): Promise<IPost | null> {
-    const updatedItem = await this.model.findByIdAndUpdate(id, item, { new: true }).exec();
+    const updatedItem = await this.model
+      .findByIdAndUpdate(id, item, { new: true })
+      .exec();
     if (!updatedItem) {
       throw new Error(`${this.model.modelName} not found`);
     }
-    
+
     // Create an update log
     const updateLog: IPostUpdateLog = {
       postId: updatedItem._id,
@@ -33,8 +35,6 @@ class PostService extends BaseService<IPost> {
 
     return updatedItem;
   }
-
-  
 }
 
 export const postService = new PostService();

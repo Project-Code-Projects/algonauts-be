@@ -8,7 +8,11 @@ class LikeService extends BaseService<ILike> {
   }
 
   async getLikesByPost(postId: string): Promise<ILike[]> {
-    const likes = await this.model.find({ postId }).populate('postId').populate('userId').exec();
+    const likes = await this.model
+      .find({ postId })
+      .populate('postId')
+      .populate('userId')
+      .exec();
     return likes;
   }
 }

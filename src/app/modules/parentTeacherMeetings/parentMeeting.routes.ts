@@ -8,7 +8,10 @@ router.put('/update/:id', ParentMeetingController.updateParentMeeting);
 router.delete('/delete/:id', ParentMeetingController.deleteParentMeeting);
 router.get('/:id', ParentMeetingController.getParentMeetingById);
 router.get('/parent/:parentId', ParentMeetingController.getMeetingsByParent);
-router.get('/instructor/:instructorId', ParentMeetingController.getMeetingsByInstructor);
+router.get(
+  '/instructor/:instructorId',
+  ParentMeetingController.getMeetingsByInstructor,
+);
 router.get('/', ParentMeetingController.getAllParentMeetings);
 
 export const ParentMeetingRoutes = router;

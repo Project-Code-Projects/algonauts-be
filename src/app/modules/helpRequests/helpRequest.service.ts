@@ -7,8 +7,13 @@ class HelpRequestService {
     return newItem;
   }
 
-  async update(id: string, item: Partial<IHelpRequest>): Promise<IHelpRequest | null> {
-    const updatedItem = await HelpRequest.findByIdAndUpdate(id, item, { new: true }).exec();
+  async update(
+    id: string,
+    item: Partial<IHelpRequest>,
+  ): Promise<IHelpRequest | null> {
+    const updatedItem = await HelpRequest.findByIdAndUpdate(id, item, {
+      new: true,
+    }).exec();
     if (!updatedItem) {
       throw new Error(`${HelpRequest.modelName} not found`);
     }
@@ -37,12 +42,20 @@ class HelpRequestService {
   }
 
   async getHelpRequestsByStudent(studentId: string): Promise<IHelpRequest[]> {
-    const helpRequests = await HelpRequest.find({ studentId }).populate('studentId').populate('instructorId').exec();
+    const helpRequests = await HelpRequest.find({ studentId })
+      .populate('studentId')
+      .populate('instructorId')
+      .exec();
     return helpRequests;
   }
 
-  async getHelpRequestsByInstructor(instructorId: string): Promise<IHelpRequest[]> {
-    const helpRequests = await HelpRequest.find({ instructorId }).populate('studentId').populate('instructorId').exec();
+  async getHelpRequestsByInstructor(
+    instructorId: string,
+  ): Promise<IHelpRequest[]> {
+    const helpRequests = await HelpRequest.find({ instructorId })
+      .populate('studentId')
+      .populate('instructorId')
+      .exec();
     return helpRequests;
   }
 }

@@ -31,4 +31,7 @@ const HelpRequestSchema = new Schema<IHelpRequest, HelpRequestModel>(
   },
 );
 
-export const HelpRequest = model<IHelpRequest, HelpRequestModel>('HelpRequest', HelpRequestSchema);
+export const HelpRequest = model<IHelpRequest, HelpRequestModel>(
+  'HelpRequest',
+  HelpRequestSchema,
+);
