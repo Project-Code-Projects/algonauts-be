@@ -1,11 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { IUser, UserModel } from './user.interface';
-
-const UserType = {
-  Parent: 'parent',
-  Student: 'student',
-  Instructor: 'instructor',
-};
+import { IUser, UserModel, UserType } from './user.interface';
 
 const UserSchema = new Schema<IUser, UserModel>(
   {
@@ -15,7 +9,7 @@ const UserSchema = new Schema<IUser, UserModel>(
     },
     type: {
       type: String,
-      enum: [UserType.Parent, UserType.Student, UserType.Instructor],
+      enum: Object.values(UserType),
       required: true,
     },
     avatar: {

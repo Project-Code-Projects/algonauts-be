@@ -1,7 +1,7 @@
 import { Model } from 'mongoose';
 
 /* eslint-disable no-unused-vars */
-enum UserType {
+export enum UserType {
   Parent = 'parent',
   Student = 'student',
   Instructor = 'instructor',
