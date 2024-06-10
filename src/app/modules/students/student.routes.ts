@@ -7,6 +7,7 @@ router.post('/create', StudentController.createStudent);
 router.put('/update/:id', StudentController.updateStudent);
 router.delete('/delete/:id', StudentController.deleteStudent);
 router.get('/:id', StudentController.getStudentById);
+router.get('/user/:userId', StudentController.getStudentByUserID);
 router.get('/parent/:parentId', StudentController.getStudentsByParent);
 router.get('/', StudentController.getAllStudents);
 

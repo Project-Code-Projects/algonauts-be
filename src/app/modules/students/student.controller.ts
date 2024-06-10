@@ -49,6 +49,17 @@ const getStudentById = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getStudentByUserID = catchAsync(async (req: Request, res: Response) => {
+  const userId = req.params.userId;
+  const result = await studentService.getStudentByUserID(userId);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    data: result,
+  });
+});
+
 const getStudentsByParent = catchAsync(async (req: Request, res: Response) => {
   const parentId = req.params.parentId;
   const result = await studentService.getStudentsByParent(parentId);
@@ -77,4 +88,5 @@ export const StudentController = {
   getStudentById,
   getStudentsByParent,
   getAllStudents,
+  getStudentByUserID,
 };
