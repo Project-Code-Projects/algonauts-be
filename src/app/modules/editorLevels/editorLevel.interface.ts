@@ -5,4 +5,4 @@ export interface IEditorLevel extends Document {
   tests: string;
 }
 
-export type EditorLevelModel = Model<IEditorLevel,Record<string, unknown> >;
+export type EditorLevelModel = Model<IEditorLevel, Record<string, unknown>>;

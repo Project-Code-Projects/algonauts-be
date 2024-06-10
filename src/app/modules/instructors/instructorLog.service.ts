@@ -8,7 +8,10 @@ class InstructorLogService extends BaseService<IInstructorLog> {
   }
 
   async getLogsByInstructor(instructorId: string): Promise<IInstructorLog[]> {
-    const logs = await this.model.find({ instructorId }).populate('instructorId').exec();
+    const logs = await this.model
+      .find({ instructorId })
+      .populate('instructorId')
+      .exec();
     return logs;
   }
 }
