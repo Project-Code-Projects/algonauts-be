@@ -9,6 +9,11 @@ import { StudentRoutes } from '../modules/students/student.routes';
 import { InstructorRoutes } from '../modules/instructors/instructor.routes';
 import { HelpRequestRoutes } from '../modules/helpRequests/helpRequest.routes';
 import { ParentMeetingRoutes } from '../modules/parentTeacherMeetings/parentMeeting.routes';
+import { SectionRoutes } from '../modules/sections/section.routes';
+import { ChapterRoutes } from '../modules/chapters/chapter.routes';
+import { ExerciseRoutes } from '../modules/exercises/exercise.routes';
+import { BlockLevelRoutes } from '../modules/blockLevels/blockLevel.routes';
+import { EditorLevelRoutes } from '../modules/editorLevels/editorLevel.routes';
 
 const router = express.Router();
 
@@ -53,6 +58,27 @@ const moduleRoutes = [
     path: '/parent-meeting',
     route: ParentMeetingRoutes,
   },
+  {
+    path: '/section',
+    route: SectionRoutes,
+  },
+  {
+    path: '/chapter',
+    route: ChapterRoutes,
+  },
+  {
+    path: '/exercise',
+    route: ExerciseRoutes,
+  },
+  {
+    path: '/block-level',
+    route: BlockLevelRoutes,
+  },
+  {
+    path:'editor-level',
+    route: EditorLevelRoutes,
+  }
+
 ];
 
 moduleRoutes.forEach(route => router.use(route.path, route.route));
