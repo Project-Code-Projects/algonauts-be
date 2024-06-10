@@ -18,4 +18,7 @@ const InstructorLogSchema = new Schema<IInstructorLog, InstructorLogModel>(
   },
 );
 
-export const InstructorLog = model<IInstructorLog, InstructorLogModel>('InstructorLog', InstructorLogSchema);
+export const InstructorLog = model<IInstructorLog, InstructorLogModel>(
+  'InstructorLog',
+  InstructorLogSchema,
+);

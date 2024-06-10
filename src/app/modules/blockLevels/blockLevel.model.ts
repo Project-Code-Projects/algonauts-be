@@ -26,4 +26,7 @@ const BlockLevelSchema = new Schema<IBlockLevel, BlockLevelModel>(
   },
 );
 
-export const BlockLevel = model<IBlockLevel, BlockLevelModel>('BlockLevel', BlockLevelSchema);
+export const BlockLevel = model<IBlockLevel, BlockLevelModel>(
+  'BlockLevel',
+  BlockLevelSchema,
+);

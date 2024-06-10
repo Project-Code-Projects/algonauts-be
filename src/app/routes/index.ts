@@ -75,10 +75,9 @@ const moduleRoutes = [
     route: BlockLevelRoutes,
   },
   {
-    path:'editor-level',
+    path: 'editor-level',
     route: EditorLevelRoutes,
-  }
-
+  },
 ];
 
 moduleRoutes.forEach(route => router.use(route.path, route.route));

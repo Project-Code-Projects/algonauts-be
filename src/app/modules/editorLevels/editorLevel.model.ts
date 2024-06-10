@@ -18,4 +18,7 @@ const EditorLevelSchema = new Schema<IEditorLevel, EditorLevelModel>(
   },
 );
 
-export const EditorLevel = model<IEditorLevel, EditorLevelModel>('EditorLevel', EditorLevelSchema);
+export const EditorLevel = model<IEditorLevel, EditorLevelModel>(
+  'EditorLevel',
+  EditorLevelSchema,
+);

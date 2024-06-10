@@ -27,4 +27,7 @@ const ExerciseSchema = new Schema<IExercise, ExerciseModel>(
   },
 );
 
-export const Exercise = model<IExercise, ExerciseModel>('Exercise', ExerciseSchema);
+export const Exercise = model<IExercise, ExerciseModel>(
+  'Exercise',
+  ExerciseSchema,
+);

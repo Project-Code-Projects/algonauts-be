@@ -1,5 +1,9 @@
 import { Schema, model } from 'mongoose';
-import { IExerciseLog, ExerciseLogModel, ExerciseLogStatus } from './exerciseLog.interface';
+import {
+  IExerciseLog,
+  ExerciseLogModel,
+  ExerciseLogStatus,
+} from './exerciseLog.interface';
 
 const ExerciseLogSchema = new Schema<IExerciseLog, ExerciseLogModel>(
   {
@@ -41,4 +45,7 @@ const ExerciseLogSchema = new Schema<IExerciseLog, ExerciseLogModel>(
   },
 );
 
-export const ExerciseLog = model<IExerciseLog, ExerciseLogModel>('ExerciseLog', ExerciseLogSchema);
+export const ExerciseLog = model<IExerciseLog, ExerciseLogModel>(
+  'ExerciseLog',
+  ExerciseLogSchema,
+);
