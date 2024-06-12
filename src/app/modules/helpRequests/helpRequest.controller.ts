@@ -3,7 +3,9 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import httpStatus from 'http-status';
 import { helpRequestService } from './helpRequest.service';
-import { getIoInstance } from '../../../io';
+import { getIoInstance } from '../../../socket';
+import { User } from '../users/user.model';
+import { Student } from '../students/student.model';
 
 const createHelpRequest = catchAsync(async (req: Request, res: Response) => {
   const helpRequest = {
@@ -21,11 +23,10 @@ const createHelpRequest = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-
-
 // this api is being used for accepting request will be updated in rafactor
 const updateHelpRequest = catchAsync(async (req: Request, res: Response) => {
   const io = getIoInstance();
+  console.log(req.body, 'req.body');
 
   const helpRequestId = req.params.id;
   const roomId = helpRequestId; // Generate room ID
@@ -39,7 +40,8 @@ const updateHelpRequest = catchAsync(async (req: Request, res: Response) => {
 
   if (result && result.status === 'accepted') {
     console.log('Request Accepted');
-    io.emit('request-accepted', { helpRequestId, roomId });
+    const student = await Student.findById(result.studentId)
+    io.to(student?.userId).emit('request-accepted', { helpRequestId, roomId });
   }
 
   sendResponse(res, {

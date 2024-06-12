@@ -6,6 +6,7 @@ import { Server } from 'http';
 import { ExpressPeerServer } from 'peer';
 import { Server as SocketIOServer } from 'socket.io';
 import { setIoInstance } from './io';
+import { initSocket } from './socket';
 
 process.on('uncaughtException', error => {
   console.error('Uncaught Exception detected', error);
@@ -34,7 +35,6 @@ async function main() {
     // app.use(peerServer);
     app.use('/peerjs', peerServer);
 
-
     io = new SocketIOServer(server, {
       cors: {
         origin: '*',
@@ -42,15 +42,27 @@ async function main() {
       },
     });
 
-    io.on('connection', socket => {
-      console.log('New client connected');
+    // const studentSocketMap: Map<string, string> = new Map();
+    // io.on('connection', socket => {
+    //   console.log('New client connected');
 
-      socket.on('disconnect', () => {
-        console.log('Client disconnected');
-      });
-    });
+    //   socket.on('register-student', (studentId: string) => {
+    //     studentSocketMap.set(studentId, socket.id);
+    //     console.log(`Student registered: ${studentId} with socket ID: ${socket.id}`);
+    //   });
 
-    setIoInstance(io);
+    //   socket.on('register-student', (studentId: string) => {
+    //     studentSocketMap.set(studentId, socket.id);
+    //     console.log(`Student registered: ${studentId} with socket ID: ${socket.id}`);
+    //   });
+
+    //   socket.on('disconnect', () => {
+    //     console.log('Client disconnected');
+    //   });
+    // });
+
+    initSocket(io);
+    // setIoInstance(io);
   } catch (err) {
     console.error('Failed to connect to MongoDB', err);
     process.exit(1); // Exit process if unable to connect to database
