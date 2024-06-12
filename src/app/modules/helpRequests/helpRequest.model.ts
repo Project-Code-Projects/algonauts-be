@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { IHelpRequest, HelpRequestModel } from './helpRequest.interface';
+import { IHelpRequest, HelpRequestModel, HelpRequestStatus } from './helpRequest.interface';
 
 const HelpRequestSchema = new Schema<IHelpRequest, HelpRequestModel>(
   {
@@ -10,12 +10,16 @@ const HelpRequestSchema = new Schema<IHelpRequest, HelpRequestModel>(
     },
     instructorId: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Instructor',
+      required: false,
+    },
+    question: {
+      type: String,
       required: true,
     },
     acceptedAt: {
       type: Date,
-      required: true,
+      required: false,
     },
     completedAt: {
       type: Date,
@@ -25,13 +29,16 @@ const HelpRequestSchema = new Schema<IHelpRequest, HelpRequestModel>(
       type: String,
       required: false,
     },
+    status: {
+      type: String,
+      enum: Object.values(HelpRequestStatus),
+      default: HelpRequestStatus.PENDING,
+      required: true,
+    },
   },
   {
     timestamps: true,
   },
 );
 
-export const HelpRequest = model<IHelpRequest, HelpRequestModel>(
-  'HelpRequest',
-  HelpRequestSchema,
-);
+export const HelpRequest = model<IHelpRequest, HelpRequestModel>('HelpRequest', HelpRequestSchema);

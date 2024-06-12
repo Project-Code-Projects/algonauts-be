@@ -1,4 +1,4 @@
-import BaseService from '../../../shared/baseService';
+import BaseService from '../../../shared/BaseService';
 import { Parent } from './parent.model';
 import { IParent } from './parent.interface';
 

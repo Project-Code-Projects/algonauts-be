@@ -3,9 +3,16 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import httpStatus from 'http-status';
 import { helpRequestService } from './helpRequest.service';
+import { getIoInstance } from '../../../io';
+
 
 const createHelpRequest = catchAsync(async (req: Request, res: Response) => {
-  const result = await helpRequestService.create(req.body);
+  const helpRequest = {
+    ...req.body,
+    // status:
+  };
+  
+  const result = await helpRequestService.create(helpRequest);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -15,9 +22,24 @@ const createHelpRequest = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+// this api is being used for accepting request will be updated in rafactor
 const updateHelpRequest = catchAsync(async (req: Request, res: Response) => {
+  const io = getIoInstance();
+
   const helpRequestId = req.params.id;
-  const result = await helpRequestService.update(helpRequestId, req.body);
+  const roomId = `room_${helpRequestId}`; // Generate room ID
+  let updateData = {...req.body};
+  
+  if(req.body.status === 'accepted') {
+    // send notification to students
+    updateData = {...updateData, roomId};
+  }
+  const result = await helpRequestService.update(helpRequestId, updateData);
+
+  if(result && result.status === 'accepted'){
+    console.log("Request Accepted");
+    io.emit('request-accepted', { helpRequestId, roomId });
+  }
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -77,7 +99,7 @@ const getHelpRequestsByInstructor = catchAsync(
 );
 
 const getAllHelpRequests = catchAsync(async (req: Request, res: Response) => {
-  const result = await helpRequestService.getAll();
+  const result = await helpRequestService.getAll(req.query);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
