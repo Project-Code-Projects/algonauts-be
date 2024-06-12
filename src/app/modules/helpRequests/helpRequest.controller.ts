@@ -21,12 +21,14 @@ const createHelpRequest = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+
+
 // this api is being used for accepting request will be updated in rafactor
 const updateHelpRequest = catchAsync(async (req: Request, res: Response) => {
   const io = getIoInstance();
 
   const helpRequestId = req.params.id;
-  const roomId = `room_${helpRequestId}`; // Generate room ID
+  const roomId = helpRequestId; // Generate room ID
   let updateData = { ...req.body };
 
   if (req.body.status === 'accepted') {

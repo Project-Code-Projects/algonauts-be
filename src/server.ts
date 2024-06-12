@@ -31,7 +31,9 @@ async function main() {
     });
 
     console.log(peerServer.path());
-    app.use('/myapp', peerServer);
+    // app.use(peerServer);
+    app.use('/peerjs', peerServer);
+
 
     io = new SocketIOServer(server, {
       cors: {
