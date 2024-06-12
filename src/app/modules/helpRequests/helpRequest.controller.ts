@@ -5,13 +5,12 @@ import httpStatus from 'http-status';
 import { helpRequestService } from './helpRequest.service';
 import { getIoInstance } from '../../../io';
 
-
 const createHelpRequest = catchAsync(async (req: Request, res: Response) => {
   const helpRequest = {
     ...req.body,
     // status:
   };
-  
+
   const result = await helpRequestService.create(helpRequest);
 
   sendResponse(res, {
@@ -28,16 +27,16 @@ const updateHelpRequest = catchAsync(async (req: Request, res: Response) => {
 
   const helpRequestId = req.params.id;
   const roomId = `room_${helpRequestId}`; // Generate room ID
-  let updateData = {...req.body};
-  
-  if(req.body.status === 'accepted') {
+  let updateData = { ...req.body };
+
+  if (req.body.status === 'accepted') {
     // send notification to students
-    updateData = {...updateData, roomId};
+    updateData = { ...updateData, roomId };
   }
   const result = await helpRequestService.update(helpRequestId, updateData);
 
-  if(result && result.status === 'accepted'){
-    console.log("Request Accepted");
+  if (result && result.status === 'accepted') {
+    console.log('Request Accepted');
     io.emit('request-accepted', { helpRequestId, roomId });
   }
 

@@ -1,5 +1,9 @@
 import { Schema, model } from 'mongoose';
-import { IHelpRequest, HelpRequestModel, HelpRequestStatus } from './helpRequest.interface';
+import {
+  IHelpRequest,
+  HelpRequestModel,
+  HelpRequestStatus,
+} from './helpRequest.interface';
 
 const HelpRequestSchema = new Schema<IHelpRequest, HelpRequestModel>(
   {
@@ -41,4 +45,7 @@ const HelpRequestSchema = new Schema<IHelpRequest, HelpRequestModel>(
   },
 );
 
-export const HelpRequest = model<IHelpRequest, HelpRequestModel>('HelpRequest', HelpRequestSchema);
+export const HelpRequest = model<IHelpRequest, HelpRequestModel>(
+  'HelpRequest',
+  HelpRequestSchema,
+);

@@ -5,7 +5,6 @@ export const enum HelpRequestStatus {
   PENDING = 'pending',
   ACCEPTED = 'accepted',
   COMPLETED = 'completed',
-
 }
 export interface IHelpRequest extends Document {
   studentId: ObjectId;

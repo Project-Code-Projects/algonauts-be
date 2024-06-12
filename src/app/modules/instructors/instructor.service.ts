@@ -8,7 +8,10 @@ class InstructorService extends BaseService<IInstructor> {
   }
 
   async getInstructorsByUser(userId: string): Promise<IInstructor[]> {
-    const instructors = await this.model.find({ userId }).populate('userId').exec();
+    const instructors = await this.model
+      .find({ userId })
+      .populate('userId')
+      .exec();
     return instructors;
   }
 }

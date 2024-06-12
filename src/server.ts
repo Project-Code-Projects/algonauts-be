@@ -29,19 +29,18 @@ async function main() {
       // debug: true,
       path: '/myapp',
     });
-  
-    console.log(peerServer.path())
-    app.use('/myapp', peerServer);
 
+    console.log(peerServer.path());
+    app.use('/myapp', peerServer);
 
     io = new SocketIOServer(server, {
       cors: {
-        origin: "*",
-        methods: ["GET", "POST"]
-      }
+        origin: '*',
+        methods: ['GET', 'POST'],
+      },
     });
 
-    io.on('connection', (socket) => {
+    io.on('connection', socket => {
       console.log('New client connected');
 
       socket.on('disconnect', () => {
@@ -50,7 +49,6 @@ async function main() {
     });
 
     setIoInstance(io);
-
   } catch (err) {
     console.error('Failed to connect to MongoDB', err);
     process.exit(1); // Exit process if unable to connect to database

@@ -26,27 +26,27 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
   const { _id, type } = foundUser;
   let userData = null;
 
-  if(type === UserType.Student){
-    const student = await Student.findOne({userId: _id});
+  if (type === UserType.Student) {
+    const student = await Student.findOne({ userId: _id });
     userData = {
       _id,
       type,
       studentId: student?._id,
-    }
-  } else if(type === UserType.Instructor){
-    const instructor = await Instructor.findOne({userId: _id});
+    };
+  } else if (type === UserType.Instructor) {
+    const instructor = await Instructor.findOne({ userId: _id });
     userData = {
       _id,
       type,
       instructorId: instructor?._id,
-    }
-  } else if(type === UserType.Parent){
-    const parent = await Parent.findOne({userId: _id});
+    };
+  } else if (type === UserType.Parent) {
+    const parent = await Parent.findOne({ userId: _id });
     userData = {
       _id,
       type,
       parentId: parent?._id,
-    }
+    };
   }
 
   const token = jwtHelpers.createToken(

@@ -7,7 +7,7 @@ export const setIoInstance = (io: any) => {
 
 export const getIoInstance = () => {
   if (!ioInstance) {
-    throw new Error("Socket.io instance not initialized");
+    throw new Error('Socket.io instance not initialized');
   }
   return ioInstance;
 };

@@ -8,12 +8,22 @@ class HelpRequestService extends BaseService<IHelpRequest> {
   }
 
   async getHelpRequestsByStudent(studentId: string): Promise<IHelpRequest[]> {
-    const helpRequests = await this.model.find({ studentId }).populate('studentId').populate('instructorId').exec();
+    const helpRequests = await this.model
+      .find({ studentId })
+      .populate('studentId')
+      .populate('instructorId')
+      .exec();
     return helpRequests;
   }
 
-  async getHelpRequestsByInstructor(instructorId: string): Promise<IHelpRequest[]> {
-    const helpRequests = await this.model.find({ instructorId }).populate('studentId').populate('instructorId').exec();
+  async getHelpRequestsByInstructor(
+    instructorId: string,
+  ): Promise<IHelpRequest[]> {
+    const helpRequests = await this.model
+      .find({ instructorId })
+      .populate('studentId')
+      .populate('instructorId')
+      .exec();
     return helpRequests;
   }
 }
