@@ -1,8 +1,19 @@
 import { IUser } from './user.interface';
 import { User } from './user.model';
+import { parentService } from '../parents/parent.service';
+import { studentService } from '../students/student.service';
 
 const createUser = async (userData: IUser): Promise<IUser> => {
   const newUser = await User.create(userData);
+
+  await parentService.create({ userId: newUser._id });
+
+  if (userData.type === 'student') {
+    await studentService.create({
+      userId: newUser._id,
+      parentId: userData.parentId,
+    });
+  }
   return newUser;
 };
 
