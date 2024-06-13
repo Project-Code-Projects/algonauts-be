@@ -1,19 +1,21 @@
 import { Server } from 'socket.io';
 
 // const UserSocket: { [userId: string]: string } = {};
-const UserSocket: Map<string, string> = new Map();
+export const UserSocket: Map<string, string> = new Map();
 
 let ioInstance: Server;
 
 export const initSocket = (io: Server) => {
   ioInstance = io;
 
-  io.on('connection', (socket) => {
-    console.log('New client connected')
+  io.on('connection', socket => {
+    console.log('New client connected');
 
     socket.on('register-user', (userId: string) => {
       UserSocket.set(userId, socket.id);
       console.log(`User registered: ${userId} with socket ID: ${socket.id}`);
+      console.log(UserSocket.get(userId));
+
     });
 
     socket.on('disconnect', () => {

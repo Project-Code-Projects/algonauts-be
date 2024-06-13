@@ -3,7 +3,7 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import httpStatus from 'http-status';
 import { helpRequestService } from './helpRequest.service';
-import { getIoInstance } from '../../../socket';
+import { UserSocket, getIoInstance, getUserSocket } from '../../../socket';
 import { User } from '../users/user.model';
 import { Student } from '../students/student.model';
 
@@ -40,8 +40,15 @@ const updateHelpRequest = catchAsync(async (req: Request, res: Response) => {
 
   if (result && result.status === 'accepted') {
     console.log('Request Accepted');
-    const student = await Student.findById(result.studentId)
-    io.to(student?.userId).emit('request-accepted', { helpRequestId, roomId });
+    const student = await Student.findById(result.studentId);
+    console.log(student, 'student')
+    const socket = getUserSocket(student?.userId.toString());
+    const studentUserId = student?.userId.toString();
+    console.log(studentUserId.toString());
+    console.log(UserSocket.get(studentUserId));
+    if(socket) {
+      io.to(socket).emit('request-accepted', { helpRequestId, roomId });
+    }
   }
 
   sendResponse(res, {
