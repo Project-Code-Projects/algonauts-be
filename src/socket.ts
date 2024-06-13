@@ -15,7 +15,6 @@ export const initSocket = (io: Server) => {
       UserSocket.set(userId, socket.id);
       console.log(`User registered: ${userId} with socket ID: ${socket.id}`);
       console.log(UserSocket.get(userId));
-
     });
 
     socket.on('disconnect', () => {
