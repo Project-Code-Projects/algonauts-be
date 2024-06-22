@@ -7,8 +7,6 @@ export enum IChapterName {
   Mixed = 'mixed',
 }
 
-
-
 export interface IChapter extends Document {
   name: string;
   description: string;

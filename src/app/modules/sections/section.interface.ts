@@ -7,7 +7,6 @@ export enum ISectionName {
   Experienced = 'experienced',
 }
 
-
 export interface ISection extends Document {
   name: string;
   description: string;
