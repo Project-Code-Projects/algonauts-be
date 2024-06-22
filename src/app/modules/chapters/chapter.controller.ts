@@ -46,6 +46,7 @@ const getChapterById = catchAsync(async (req: Request, res: Response) => {
     statusCode: httpStatus.OK,
     success: true,
     data: result,
+    message: 'Chapter Fetched Successfully',
   });
 });
 
@@ -56,6 +57,7 @@ const getAllChapters = catchAsync(async (req: Request, res: Response) => {
     statusCode: httpStatus.OK,
     success: true,
     data: result,
+    message: 'Chapters Fetched Successfully',
   });
 });
 

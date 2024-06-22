@@ -46,6 +46,7 @@ const getSectionById = catchAsync(async (req: Request, res: Response) => {
     statusCode: httpStatus.OK,
     success: true,
     data: result,
+    message: 'Section Fetched Successfully',
   });
 });
 
@@ -56,6 +57,7 @@ const getAllSections = catchAsync(async (req: Request, res: Response) => {
     statusCode: httpStatus.OK,
     success: true,
     data: result,
+    message: 'Sections Fetched Successfully',
   });
 });
 

@@ -75,7 +75,7 @@ const moduleRoutes = [
     route: BlockLevelRoutes,
   },
   {
-    path: 'editor-level',
+    path: '/editor-level',
     route: EditorLevelRoutes,
   },
 ];

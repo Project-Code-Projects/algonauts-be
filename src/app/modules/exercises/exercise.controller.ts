@@ -46,6 +46,7 @@ const getExerciseById = catchAsync(async (req: Request, res: Response) => {
     statusCode: httpStatus.OK,
     success: true,
     data: result,
+    message: 'Exercise Fetched Successfully',
   });
 });
 
@@ -56,6 +57,7 @@ const getAllExercises = catchAsync(async (req: Request, res: Response) => {
     statusCode: httpStatus.OK,
     success: true,
     data: result,
+    message: 'All Exercises Fetched Successfully',
   });
 });
 
