@@ -40,7 +40,7 @@ const deleteSection = catchAsync(async (req: Request, res: Response) => {
 
 const getSectionById = catchAsync(async (req: Request, res: Response) => {
   const sectionId = req.params.id;
-  const result = await sectionService.getById(sectionId);
+  const result = await sectionService.getByIdWithChapters(sectionId);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

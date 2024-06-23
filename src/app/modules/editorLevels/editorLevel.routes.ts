@@ -7,6 +7,10 @@ router.post('/create', EditorLevelController.createEditorLevel);
 router.put('/update/:id', EditorLevelController.updateEditorLevel);
 router.delete('/delete/:id', EditorLevelController.deleteEditorLevel);
 router.get('/:id', EditorLevelController.getEditorLevelById);
+router.get(
+  '/v2/:exerciseId',
+  EditorLevelController.getEditorLevelByExerciseId,
+);
 router.get('/', EditorLevelController.getAllEditorLevels);
 
 export const EditorLevelRoutes = router;

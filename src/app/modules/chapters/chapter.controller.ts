@@ -3,6 +3,7 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import httpStatus from 'http-status';
 import { chapterService } from './chapter.service';
+import { exerciseService } from '../exercises/exercise.service';
 
 const createChapter = catchAsync(async (req: Request, res: Response) => {
   const result = await chapterService.create(req.body);
@@ -40,13 +41,17 @@ const deleteChapter = catchAsync(async (req: Request, res: Response) => {
 
 const getChapterById = catchAsync(async (req: Request, res: Response) => {
   const chapterId = req.params.id;
-  const result = await chapterService.getById(chapterId);
+  const chapterResult = await chapterService.getById(chapterId);
+  const exercisesResult = await exerciseService.getByChapterId(chapterId);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    data: result,
-    message: 'Chapter Fetched Successfully',
+    data: {
+      chapter: chapterResult,
+      exercises: exercisesResult,
+    },
+    message: 'Chapter and Exercises Fetched Successfully',
   });
 });
 

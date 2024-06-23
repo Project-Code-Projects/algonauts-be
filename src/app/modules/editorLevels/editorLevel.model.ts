@@ -24,7 +24,7 @@ const ProblemSchema = new Schema(
 const TestCaseSchema = new Schema(
   {
     input: { type: Schema.Types.Mixed, required: true },
-    target: { type: Schema.Types.Mixed, required: true },
+    target: { type: Schema.Types.Mixed },
     expected: { type: Schema.Types.Mixed, required: true },
   },
   { _id: false },

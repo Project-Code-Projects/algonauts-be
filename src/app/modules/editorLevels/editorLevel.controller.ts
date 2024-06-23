@@ -49,6 +49,19 @@ const getEditorLevelById = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getEditorLevelByExerciseId = catchAsync(
+  async (req: Request, res: Response) => {
+    const exerciseId = req.params.exerciseId;
+    const result = await editorLevelService.getByExerciseId(exerciseId);
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      data: result,
+    });
+  },
+);
+
 const getAllEditorLevels = catchAsync(async (req: Request, res: Response) => {
   const result = await editorLevelService.getAll();
 
@@ -65,4 +78,5 @@ export const EditorLevelController = {
   deleteEditorLevel,
   getEditorLevelById,
   getAllEditorLevels,
+  getEditorLevelByExerciseId,
 };
