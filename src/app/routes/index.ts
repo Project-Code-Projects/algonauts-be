@@ -14,6 +14,7 @@ import { ChapterRoutes } from '../modules/chapters/chapter.routes';
 import { ExerciseRoutes } from '../modules/exercises/exercise.routes';
 import { BlockLevelRoutes } from '../modules/blockLevels/blockLevel.routes';
 import { EditorLevelRoutes } from '../modules/editorLevels/editorLevel.routes';
+import { BeginnerLevelRoutes } from '../modules/beginnerLevels/beginnerLeve.routes';
 
 const router = express.Router();
 
@@ -77,6 +78,10 @@ const moduleRoutes = [
   {
     path: '/editor-level',
     route: EditorLevelRoutes,
+  },
+  {
+    path: '/beginner-level',
+    route: BeginnerLevelRoutes,
   },
 ];
 
