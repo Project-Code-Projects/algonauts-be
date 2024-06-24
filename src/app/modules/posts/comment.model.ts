@@ -23,4 +23,6 @@ const CommentSchema = new Schema<IComment, CommentModel>(
   },
 );
 
+
+
 export const Comment = model<IComment, CommentModel>('Comment', CommentSchema);

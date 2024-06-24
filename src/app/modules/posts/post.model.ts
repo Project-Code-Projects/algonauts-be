@@ -18,4 +18,15 @@ const PostSchema = new Schema<IPost, PostModel>(
   },
 );
 
+// Virtual field to populate comments
+PostSchema.virtual('comments', {
+  ref: 'Comment',
+  localField: '_id',
+  foreignField: 'postId',
+  justOne: false,
+});
+
+PostSchema.set('toObject', { virtuals: true });
+PostSchema.set('toJSON', { virtuals: true });
+
 export const Post = model<IPost, PostModel>('Post', PostSchema);
