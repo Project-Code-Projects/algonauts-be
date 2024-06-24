@@ -1,12 +1,16 @@
 import { Schema, model } from 'mongoose';
-import { IBeginnerLevel, BeginnerModel, ICoordinates } from './beginnerLevel.interface';
+import {
+  IBeginnerLevel,
+  BeginnerModel,
+  ICoordinates,
+} from './beginnerLevel.interface';
 
 const CoordinatesSchema = new Schema<ICoordinates>(
   {
     x: { type: Number, required: true },
     y: { type: Number, required: true },
   },
-  { _id: false }
+  { _id: false },
 );
 
 const BeginnerLevelSchema = new Schema<IBeginnerLevel, BeginnerModel>(
@@ -21,7 +25,10 @@ const BeginnerLevelSchema = new Schema<IBeginnerLevel, BeginnerModel>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
-export const BeginnerLevel = model<IBeginnerLevel, BeginnerModel>('BeginnerLevel', BeginnerLevelSchema);
+export const BeginnerLevel = model<IBeginnerLevel, BeginnerModel>(
+  'BeginnerLevel',
+  BeginnerLevelSchema,
+);

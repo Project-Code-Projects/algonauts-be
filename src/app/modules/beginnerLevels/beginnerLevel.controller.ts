@@ -49,16 +49,18 @@ const getBeginnerLevelById = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
-const getBeginnerLevelByLevelId = catchAsync(async (req: Request, res: Response) => {
-  const beginnerLevelId = req.params.level_id;
-  const result = await BeginnerLevelModel.findOne({level:beginnerLevelId });
+const getBeginnerLevelByLevelId = catchAsync(
+  async (req: Request, res: Response) => {
+    const beginnerLevelId = req.params.level_id;
+    const result = await BeginnerLevelModel.findOne({ level: beginnerLevelId });
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    data: result,
-  });
-});
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      data: result,
+    });
+  },
+);
 
 const getAllBeginnerLevels = catchAsync(async (req: Request, res: Response) => {
   const result = await beginnerLevelService.getAll();
@@ -76,5 +78,5 @@ export const BeginnerLevelController = {
   deleteBeginnerLevel,
   getBeginnerLevelById,
   getAllBeginnerLevels,
-  getBeginnerLevelByLevelId
+  getBeginnerLevelByLevelId,
 };
