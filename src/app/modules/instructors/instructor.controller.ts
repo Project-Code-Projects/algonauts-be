@@ -70,6 +70,19 @@ const getAllInstructors = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getExerciseStatistics = catchAsync(
+  async (req: Request, res: Response) => {
+    const statistics = await instructorService.getExerciseStatistics();
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      data: statistics,
+      message: `All Students' statistics retrieved successfully`,
+    });
+  },
+);
+
 export const InstructorController = {
   createInstructor,
   updateInstructor,
@@ -77,4 +90,5 @@ export const InstructorController = {
   getInstructorById,
   getInstructorsByUser,
   getAllInstructors,
+  getExerciseStatistics,
 };
