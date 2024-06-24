@@ -1,9 +1,5 @@
 import { Schema, model } from 'mongoose';
-import {
-  IExerciseLog,
-  ExerciseLogModel,
-  ExerciseLogStatus,
-} from './exerciseLog.interface';
+import { IExerciseLog, ExerciseLogModel } from './exerciseLog.interface';
 
 const ExerciseLogSchema = new Schema<IExerciseLog, ExerciseLogModel>(
   {
@@ -17,11 +13,6 @@ const ExerciseLogSchema = new Schema<IExerciseLog, ExerciseLogModel>(
       ref: 'Student',
       required: true,
     },
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-    },
     startTime: {
       type: Date,
       required: true,
@@ -30,13 +21,16 @@ const ExerciseLogSchema = new Schema<IExerciseLog, ExerciseLogModel>(
       type: Date,
       required: true,
     },
-    allotedTime: {
+    completionTime: {
+      type: Number,
+      required: true,
+    },
+    switchTabCount: {
       type: Number,
       required: true,
     },
     status: {
-      type: String,
-      enum: Object.values(ExerciseLogStatus),
+      type: Boolean,
       required: true,
     },
   },

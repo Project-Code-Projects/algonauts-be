@@ -2,9 +2,10 @@ import { Request, Response } from 'express';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import httpStatus from 'http-status';
-import { exerciseLogService } from './exerciseLog.service';
+import { exerciseLogService } from './exercviseLog.service';
 
 const createExerciseLog = catchAsync(async (req: Request, res: Response) => {
+  console.log(req.body);
   const result = await exerciseLogService.create(req.body);
 
   sendResponse(res, {
