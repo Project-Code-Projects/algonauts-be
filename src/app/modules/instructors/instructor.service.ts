@@ -2,7 +2,9 @@
 import BaseService from '../../../shared/BaseService';
 import { Instructor } from './instructor.model';
 import { IInstructor } from './instructor.interface';
-import { ExerciseLog } from '../exercises/exerciseLog.model';
+import mongoose from 'mongoose';
+import { getExerciseStatisticsAggregate } from '../../../shared/exerciseStatisticsAggregate';
+import { HelpRequest } from '../helpRequests/helpRequest.model';
 
 class InstructorService extends BaseService<IInstructor> {
   constructor() {
@@ -19,58 +21,20 @@ class InstructorService extends BaseService<IInstructor> {
   }
 
   async getExerciseStatistics() {
-    const stats = await ExerciseLog.aggregate([
-      {
-        $group: {
-          _id: '$exerciseId',
-          averageCompletionTime: { $avg: '$completionTime' },
-          totalAttempts: { $sum: 1 },
-          successfulAttempts: {
-            $sum: {
-              $cond: [{ $eq: ['$status', true] }, 1, 0],
-            },
-          },
-        },
-      },
-      {
-        $project: {
-          _id: 1,
-          averageCompletionTime: 1,
-          totalAttempts: 1,
-          successfulAttempts: 1,
-          successRate: {
-            $multiply: [
-              { $divide: ['$successfulAttempts', '$totalAttempts'] },
-              100,
-            ],
-          },
-        },
-      },
-      {
-        $lookup: {
-          from: 'exercises',
-          localField: '_id',
-          foreignField: '_id',
-          as: 'exerciseDetails',
-        },
-      },
-      {
-        $unwind: '$exerciseDetails',
-      },
-      {
-        $project: {
-          _id: 1,
-          averageCompletionTime: 1,
-          totalAttempts: 1,
-          successfulAttempts: 1,
-          successRate: 1,
-          exerciseName: '$exerciseDetails.name',
-          exerciseType: '$exerciseDetails.type',
-        },
-      },
-    ]);
+    return getExerciseStatisticsAggregate({ $match: {} }, false);
+  }
 
-    return stats;
+  async getExerciseStatisticsByStudentId(studentId: string) {
+    const statistics = await getExerciseStatisticsAggregate(
+      {
+        $match: { studentId: new mongoose.Types.ObjectId(studentId) },
+      },
+      true,
+    );
+
+    const totalHelpRequests = await HelpRequest.countDocuments({ studentId });
+
+    return { statistics, totalHelpRequests };
   }
 }
 

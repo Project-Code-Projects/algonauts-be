@@ -69,6 +69,21 @@ const getAllParents = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const getExerciseStatisticsByStudentId = catchAsync(
+  async (req: Request, res: Response) => {
+    const { studentId } = req.params;
+
+    const statistics =
+      await parentService.getExerciseStatisticsByStudentId(studentId);
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      data: statistics,
+      message: `Student's statistics retrieved successfully`,
+    });
+  },
+);
 
 export const ParentController = {
   createParent,
@@ -77,4 +92,5 @@ export const ParentController = {
   getParentById,
   getParentsByUser,
   getAllParents,
+  getExerciseStatisticsByStudentId,
 };

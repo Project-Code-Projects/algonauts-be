@@ -6,6 +6,10 @@ const router = express.Router();
 router.post('/create', ParentController.createParent);
 router.put('/update/:id', ParentController.updateParent);
 router.delete('/delete/:id', ParentController.deleteParent);
+router.get(
+  '/exercise-statistics/:studentId',
+  ParentController.getExerciseStatisticsByStudentId,
+);
 router.get('/:id', ParentController.getParentById);
 router.get('/user/:userId', ParentController.getParentsByUser);
 router.get('/', ParentController.getAllParents);

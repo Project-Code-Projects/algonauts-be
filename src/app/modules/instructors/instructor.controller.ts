@@ -83,6 +83,22 @@ const getExerciseStatistics = catchAsync(
   },
 );
 
+const getExerciseStatisticsByStudentId = catchAsync(
+  async (req: Request, res: Response) => {
+    const { studentId } = req.params;
+
+    const statistics =
+      await instructorService.getExerciseStatisticsByStudentId(studentId);
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      data: statistics,
+      message: `Student's statistics retrieved successfully`,
+    });
+  },
+);
+
 export const InstructorController = {
   createInstructor,
   updateInstructor,
@@ -91,4 +107,5 @@ export const InstructorController = {
   getInstructorsByUser,
   getAllInstructors,
   getExerciseStatistics,
+  getExerciseStatisticsByStudentId,
 };
