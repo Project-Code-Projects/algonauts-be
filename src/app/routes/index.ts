@@ -15,6 +15,7 @@ import { ExerciseRoutes } from '../modules/exercises/exercise.routes';
 import { BlockLevelRoutes } from '../modules/blockLevels/blockLevel.routes';
 import { EditorLevelRoutes } from '../modules/editorLevels/editorLevel.routes';
 import { BeginnerLevelRoutes } from '../modules/beginnerLevels/beginnerLeve.routes';
+import { exerciseLogRoutes } from '../modules/exercises/exerciseLog.routes';
 
 const router = express.Router();
 
@@ -82,7 +83,11 @@ const moduleRoutes = [
   {
     path: '/beginner-level',
     route: BeginnerLevelRoutes,
-  },
+  }, 
+  {
+    path: '/exercise-log',
+    route: exerciseLogRoutes,
+  }
 ];
 
 moduleRoutes.forEach(route => router.use(route.path, route.route));

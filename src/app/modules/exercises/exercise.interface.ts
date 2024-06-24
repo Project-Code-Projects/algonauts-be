@@ -10,6 +10,7 @@ export interface IExercise extends Document {
   description: string;
   chapterId: ObjectId;
   type: ExerciseType;
+  index: number;
 }
 
 export type ExerciseModel = Model<IExercise, Record<string, unknown>>;

@@ -2,6 +2,7 @@
 import BaseService from '../../../shared/BaseService';
 import { Exercise } from './exercise.model';
 import { IExercise } from './exercise.interface';
+import { Types } from 'mongoose';
 
 class ExerciseService extends BaseService<IExercise> {
   constructor() {
@@ -15,7 +16,29 @@ class ExerciseService extends BaseService<IExercise> {
   }
 
   async getByChapterId(chapterId: string): Promise<IExercise[]> {
-    return this.exerciseModel.find({ chapterId });
+    return this.exerciseModel.find({ chapterId }).sort({ index: 1 });
+  }
+
+  async create(exerciseData: Partial<IExercise>): Promise<IExercise> {
+    const { chapterId } = exerciseData;
+
+    if (!chapterId) {
+      throw new Error('ChapterId is required');
+    }
+
+    const lastExercise = await this.exerciseModel
+      // @ts-ignore
+      .findOne({ chapterId: new Types.ObjectId(chapterId) })
+      .sort({ index: -1 });
+
+    const newIndex = lastExercise ? lastExercise.index + 1 : 1;
+
+    const newExercise = new this.exerciseModel({
+      ...exerciseData,
+      index: newIndex,
+    });
+
+    return newExercise.save();
   }
 }
 

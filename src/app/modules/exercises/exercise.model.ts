@@ -21,6 +21,10 @@ const ExerciseSchema = new Schema<IExercise, ExerciseModel>(
       enum: Object.values(ExerciseType),
       required: true,
     },
+    index: {
+      type: Number,
+      required: true,
+    },
   },
   {
     timestamps: true,
