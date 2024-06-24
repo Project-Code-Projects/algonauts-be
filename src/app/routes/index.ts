@@ -83,11 +83,11 @@ const moduleRoutes = [
   {
     path: '/beginner-level',
     route: BeginnerLevelRoutes,
-  }, 
+  },
   {
     path: '/exercise-log',
     route: exerciseLogRoutes,
-  }
+  },
 ];
 
 moduleRoutes.forEach(route => router.use(route.path, route.route));
