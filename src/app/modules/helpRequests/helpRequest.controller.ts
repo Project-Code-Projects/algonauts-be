@@ -38,14 +38,14 @@ const updateHelpRequest = catchAsync(async (req: Request, res: Response) => {
   }
   const result = await helpRequestService.update(helpRequestId, updateData);
 
+  
   if (result && result.status === 'accepted') {
-    console.log('Request Accepted');
+    
     const student = await Student.findById(result.studentId);
-    console.log(student, 'student');
-    const socket = getUserSocket(student?.userId.toString());
-    const studentUserId = student?.userId.toString();
-    console.log(studentUserId.toString());
-    console.log(UserSocket.get(studentUserId));
+    let socket = null;
+    if(student){
+       socket = getUserSocket(student?.userId.toString());
+    }
     if (socket) {
       io.to(socket).emit('request-accepted', { helpRequestId, roomId });
     }

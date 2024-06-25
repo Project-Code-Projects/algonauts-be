@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Document, Model, ObjectId } from 'mongoose';
 
-export const enum HelpRequestStatus {
+export  enum HelpRequestStatus {
   PENDING = 'pending',
   ACCEPTED = 'accepted',
   COMPLETED = 'completed',

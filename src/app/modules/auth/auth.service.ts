@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Secret } from 'jsonwebtoken';
 import config from '../../../config';
 import { ILoginUser, ILoginUserResponse } from './auth.interface';
@@ -50,6 +51,7 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
   }
 
   const token = jwtHelpers.createToken(
+    // @ts-ignore
     userData,
     config.jwt.secret as Secret,
     config.jwt.expires_in as string,

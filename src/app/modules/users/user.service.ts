@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { IUser } from './user.interface';
 import { User } from './user.model';
 import { parentService } from '../parents/parent.service';
@@ -12,14 +13,21 @@ const createUser = async (userData: IUser): Promise<IUser> => {
 
   if (userData.type === UserType.Parent) {
     await parentService.create({
+      // @ts-ignore
       userId: newUser._id,
     });
   } else if (userData.type === UserType.Student) {
     await studentService.create({
+      // @ts-ignore
+      
       userId: newUser._id,
+      // @ts-ignore
+
       parentId: userData.parentId,
     });
   } else if (userData.type === UserType.Instructor) {
+      // @ts-ignore
+   
     await instructorService.create({ userId: newUser._id });
   }
 

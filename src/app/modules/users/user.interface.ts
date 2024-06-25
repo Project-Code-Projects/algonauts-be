@@ -1,4 +1,4 @@
-import { Model } from 'mongoose';
+import { Model , } from 'mongoose';
 
 /* eslint-disable no-unused-vars */
 export enum UserType {
@@ -7,12 +7,12 @@ export enum UserType {
   Instructor = 'instructor',
 }
 
-export type IUser = {
+export interface IUser  {
   name: string;
   type: UserType;
   avatar: string;
   email: string;
   password: string;
-};
+}
 
 export type UserModel = Model<IUser, Record<string, unknown>>;

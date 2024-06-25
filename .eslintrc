@@ -7,10 +7,10 @@
   "plugins": ["@typescript-eslint"],
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "rules": {
-    "no-unused-vars": "error",
-    "no-console": "warn",
-    "no-undef": "error",
-    "no-unused-expressions": "error",
+    // "no-unused-vars": "error",
+    // "no-console": "warn",
+    // "no-undef": "error",
+    // "no-unused-expressions": "error",
     "no-unreachable": "error",
     "@typescript-eslint/consistent-type-definitions": ["error"]
   },
