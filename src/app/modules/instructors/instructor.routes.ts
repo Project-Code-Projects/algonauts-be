@@ -11,6 +11,10 @@ router.get(
   '/exercise-statistics/:studentId',
   InstructorController.getExerciseStatisticsByStudentId,
 );
+router.get(
+  '/student-code-snippet/:studentId',
+  InstructorController.getStudentCodeSnippets,
+);
 router.get('/user/:userId', InstructorController.getInstructorsByUser);
 router.get('/:id', InstructorController.getInstructorById);
 router.get('/', InstructorController.getAllInstructors);
