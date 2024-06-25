@@ -6,8 +6,13 @@ const router = express.Router();
 router.post('/create', InstructorController.createInstructor);
 router.put('/update/:id', InstructorController.updateInstructor);
 router.delete('/delete/:id', InstructorController.deleteInstructor);
-router.get('/:id', InstructorController.getInstructorById);
+router.get('/exercise-statistics', InstructorController.getExerciseStatistics);
+router.get(
+  '/exercise-statistics/:studentId',
+  InstructorController.getExerciseStatisticsByStudentId,
+);
 router.get('/user/:userId', InstructorController.getInstructorsByUser);
+router.get('/:id', InstructorController.getInstructorById);
 router.get('/', InstructorController.getAllInstructors);
 
 export const InstructorRoutes = router;

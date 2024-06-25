@@ -10,6 +10,7 @@ export interface IExerciseLog extends Document {
   completionTime: number;
   switchTabCount: number;
   status: boolean;
+  codeSnippet: string;
 }
 
 export type ExerciseLogModel = Model<IExerciseLog, Record<string, unknown>>;

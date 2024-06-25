@@ -70,6 +70,35 @@ const getAllInstructors = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getExerciseStatistics = catchAsync(
+  async (req: Request, res: Response) => {
+    const statistics = await instructorService.getExerciseStatistics();
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      data: statistics,
+      message: `All Students' statistics retrieved successfully`,
+    });
+  },
+);
+
+const getExerciseStatisticsByStudentId = catchAsync(
+  async (req: Request, res: Response) => {
+    const { studentId } = req.params;
+
+    const statistics =
+      await instructorService.getExerciseStatisticsByStudentId(studentId);
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      data: statistics,
+      message: `Student's statistics retrieved successfully`,
+    });
+  },
+);
+
 export const InstructorController = {
   createInstructor,
   updateInstructor,
@@ -77,4 +106,6 @@ export const InstructorController = {
   getInstructorById,
   getInstructorsByUser,
   getAllInstructors,
+  getExerciseStatistics,
+  getExerciseStatisticsByStudentId,
 };
