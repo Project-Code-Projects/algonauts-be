@@ -56,7 +56,7 @@ class BaseService<T extends Document> {
     populateOptions?: Array<string | any>,
     sortOptions?: { [key: string]: 1 | -1 }, // Adding sorting functionality
   ): Promise<T[]> {
-      // @ts-ignore
+    // @ts-ignore
 
     let query = this.model.find(queryOptions);
     if (populateOptions) {
@@ -68,7 +68,7 @@ class BaseService<T extends Document> {
       query = query.sort(sortOptions);
     }
     const items = await query.exec();
-      // @ts-ignore
+    // @ts-ignore
 
     return items;
   }

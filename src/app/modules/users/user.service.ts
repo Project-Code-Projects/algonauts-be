@@ -19,15 +19,15 @@ const createUser = async (userData: IUser): Promise<IUser> => {
   } else if (userData.type === UserType.Student) {
     await studentService.create({
       // @ts-ignore
-      
+
       userId: newUser._id,
       // @ts-ignore
 
       parentId: userData.parentId,
     });
   } else if (userData.type === UserType.Instructor) {
-      // @ts-ignore
-   
+    // @ts-ignore
+
     await instructorService.create({ userId: newUser._id });
   }
 
