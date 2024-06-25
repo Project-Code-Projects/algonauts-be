@@ -1,9 +1,7 @@
 // src/shared/baseService.ts
 import { Document, Model } from 'mongoose';
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 interface QueryOptions {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 
@@ -53,7 +51,7 @@ class BaseService<T extends Document> {
 
   async getAll(
     queryOptions: QueryOptions = {},
-    populateOptions?: string[],
+    populateOptions?: Array<string | object>,
   ): Promise<T[]> {
     let query = this.model.find(queryOptions);
     if (populateOptions) {
