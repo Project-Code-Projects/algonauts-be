@@ -51,6 +51,7 @@ const getPostById = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllPosts = catchAsync(async (req: Request, res: Response) => {
+  
   const result = await postService.getAll({}, [
     { path: 'authorId' },
     {
@@ -59,7 +60,9 @@ const getAllPosts = catchAsync(async (req: Request, res: Response) => {
         path: 'userId',
       },
     },
-  ]);
+  ],
+  { ['createdAt']: -1 }
+);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

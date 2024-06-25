@@ -52,12 +52,16 @@ class BaseService<T extends Document> {
   async getAll(
     queryOptions: QueryOptions = {},
     populateOptions?: Array<string | object>,
+    sortOptions?: { [key: string]: 1 | -1 } // Adding sorting functionality
   ): Promise<T[]> {
     let query = this.model.find(queryOptions);
     if (populateOptions) {
       populateOptions.forEach(option => {
         query = query.populate(option);
       });
+    }
+    if (sortOptions) {
+      query = query.sort(sortOptions);
     }
     const items = await query.exec();
     return items;
