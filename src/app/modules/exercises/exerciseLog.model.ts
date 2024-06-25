@@ -33,6 +33,10 @@ const ExerciseLogSchema = new Schema<IExerciseLog, ExerciseLogModel>(
       type: Boolean,
       required: true,
     },
+    codeSnippet: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
