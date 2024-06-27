@@ -15,6 +15,11 @@ const CoordinatesSchema = new Schema<ICoordinates>(
 
 const BeginnerLevelSchema = new Schema<IBeginnerLevel, BeginnerModel>(
   {
+    exerciseId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Exercise',
+      required: true,
+    },
     player: { type: CoordinatesSchema, required: true },
     spacecraft: { type: CoordinatesSchema, required: true },
     blackholes: { type: [CoordinatesSchema], required: true },
@@ -22,6 +27,7 @@ const BeginnerLevelSchema = new Schema<IBeginnerLevel, BeginnerModel>(
     description: { type: String, required: true },
     mandatoryNodes: { type: [String], required: false },
     allowedButtons: { type: [String], required: false },
+    name: { type: String, required: true },
   },
   {
     timestamps: true,

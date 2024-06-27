@@ -1,4 +1,4 @@
-import { Document, Model } from 'mongoose';
+import { Document, Model, ObjectId } from 'mongoose';
 
 export interface ICoordinates {
   x: number;
@@ -14,6 +14,8 @@ export interface IBeginnerLevel extends Document {
   description: string;
   mandatoryNodes: string[];
   allowedButtons: string[];
+  name: string;
+  exerciseId: ObjectId;
 }
 
 export type BeginnerModel = Model<IBeginnerLevel, Record<string, unknown>>;
