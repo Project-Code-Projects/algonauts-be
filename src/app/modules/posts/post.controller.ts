@@ -63,7 +63,7 @@ const getAllPosts = catchAsync(async (req: Request, res: Response) => {
       },
       {
         path: 'likes',
-      }
+      },
     ],
     { ['createdAt']: -1 },
   );

@@ -7,7 +7,6 @@ import httpStatus from 'http-status';
 import { likeService } from './like.service';
 import { Like } from './like.model';
 
-
 const createLike = catchAsync(async (req: Request, res: Response) => {
   const result = await likeService.create(req.body);
 
@@ -24,17 +23,17 @@ const likePost = catchAsync(async (req: Request, res: Response) => {
   // const userId = req.user._id;
   const userId = req.body.userId;
 
-  const existingLike = await Like.findOne({postId, userId});
+  const existingLike = await Like.findOne({ postId, userId });
   console.log(existingLike);
   let result = null;
   if (existingLike) {
-    console.log("delete post");
-    // @ts-expect-error 
+    console.log('delete post');
+    // @ts-expect-error
     // console.log(existingLike._id);
-     result = await likeService.delete(existingLike._id);
+    result = await likeService.delete(existingLike._id);
   } else {
-    console.log('create likes')
-    //@ts-expect-error 
+    console.log('create likes');
+    //@ts-expect-error
     result = await likeService.create({ postId, userId });
   }
 
@@ -72,5 +71,5 @@ export const LikeController = {
   createLike,
   deleteLike,
   getLikesByPost,
-  likePost
+  likePost,
 };
