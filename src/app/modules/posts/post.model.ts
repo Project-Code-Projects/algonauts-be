@@ -25,6 +25,13 @@ PostSchema.virtual('comments', {
   foreignField: 'postId',
   justOne: false,
 });
+// Virtual field to populate likes
+PostSchema.virtual('likes', {
+  ref: 'Like',
+  localField: '_id',
+  foreignField: 'postId',
+  justOne: false,
+});
 
 PostSchema.set('toObject', { virtuals: true });
 PostSchema.set('toJSON', { virtuals: true });
