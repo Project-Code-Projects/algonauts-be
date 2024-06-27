@@ -81,6 +81,18 @@ const getAllStudents = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getStudentProgress = catchAsync(async (req: Request, res: Response) => {
+  const studentId = req.params.studentId;
+  const result = await studentService.getStudentProgress(studentId);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: `Student's progress retrieved`,
+    data: result,
+  });
+});
+
 export const StudentController = {
   createStudent,
   updateStudent,
@@ -89,4 +101,5 @@ export const StudentController = {
   getStudentsByParent,
   getAllStudents,
   getStudentByUserID,
+  getStudentProgress,
 };
