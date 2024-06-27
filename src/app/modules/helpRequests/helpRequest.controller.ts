@@ -38,6 +38,8 @@ const updateHelpRequest = catchAsync(async (req: Request, res: Response) => {
   }
   const result = await helpRequestService.update(helpRequestId, updateData);
 
+
+  // Send notification to the student
   if (result && result.status === 'accepted') {
     const student = await Student.findById(result.studentId);
     let socket = null;
@@ -46,6 +48,18 @@ const updateHelpRequest = catchAsync(async (req: Request, res: Response) => {
     }
     if (socket) {
       io.to(socket).emit('request-accepted', { helpRequestId, roomId });
+    }
+  }
+
+  // close connection for the student
+  if (result && result.status === 'completed') {
+    const student = await Student.findById(result.studentId);
+    let socket = null;
+    if (student) {
+      socket = getUserSocket(student?.userId.toString());
+    }
+    if (socket) {
+      io.to(socket).emit('instructor-disconnected');
     }
   }
 
