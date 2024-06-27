@@ -59,10 +59,29 @@ const getAllUsers = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const resetUserPassword = catchAsync(async (req: Request, res: Response) => {
+  const userId = req.params.userId;
+  const { oldPassword, newPassword } = req.body;
+  console.log(oldPassword, newPassword);
+  const result = await UserService.resetUserPassword(
+    userId,
+    oldPassword,
+    newPassword,
+  );
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User Updated Successfully',
+    data: result,
+  });
+});
+
 export const UserController = {
   createUser,
   updateUser,
   deleteUser,
   getUserById,
   getAllUsers,
+  resetUserPassword,
 };
