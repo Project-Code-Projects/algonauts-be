@@ -38,7 +38,6 @@ const updateHelpRequest = catchAsync(async (req: Request, res: Response) => {
   }
   const result = await helpRequestService.update(helpRequestId, updateData);
 
-
   // Send notification to the student
   if (result && result.status === 'accepted') {
     const student = await Student.findById(result.studentId);
