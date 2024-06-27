@@ -68,10 +68,35 @@ const getAllUsers = async (): Promise<IUser[]> => {
   return users;
 };
 
+const resetUserPassword = async (
+  userId: string,
+  oldPassword: string,
+  newPassword: string,
+) => {
+  const user = await User.findById(userId).exec();
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  if (user.password !== oldPassword) {
+    throw new Error('Old password is incorrect');
+  }
+
+  if (oldPassword === newPassword) {
+    throw new Error('New password must be different from the old password');
+  }
+
+  user.password = newPassword;
+  await user.save();
+
+  return user;
+};
+
 export const UserService = {
   createUser,
   updateUser,
   deleteUser,
   getUserById,
   getAllUsers,
+  resetUserPassword,
 };
