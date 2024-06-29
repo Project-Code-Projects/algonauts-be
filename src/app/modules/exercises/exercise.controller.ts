@@ -61,10 +61,32 @@ const getAllExercises = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const fetchNextExercise = catchAsync(async (req: Request, res: Response) => {
+  const exerciseId = req.params.exerciseId;
+  const result = await exerciseService.fetchNextExercise(exerciseId);
+
+  if (!result) {
+    return sendResponse(res, {
+      statusCode: httpStatus.NOT_FOUND,
+      success: false,
+      data: null,
+      message: 'No next exercise found',
+    });
+  }
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    data: result,
+    message: 'Next exercise fetched successfully',
+  });
+});
+
 export const ExerciseController = {
   createExercise,
   updateExercise,
   deleteExercise,
   getExerciseById,
   getAllExercises,
+  fetchNextExercise,
 };

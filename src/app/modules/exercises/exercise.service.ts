@@ -40,6 +40,26 @@ class ExerciseService extends BaseService<IExercise> {
 
     return newExercise.save();
   }
+
+  async fetchNextExercise(exerciseId: string) {
+    // Fetch the current exercise by ID
+    const currentExercise = await this.exerciseModel.findById(exerciseId);
+    if (!currentExercise) {
+      throw new Error('Exercise not found');
+    }
+
+    const { chapterId, index } = currentExercise;
+
+    // Find the next exercise in the same chapter
+    const nextExercise = await this.exerciseModel
+      .findOne({
+        chapterId,
+        index: { $gt: index },
+      })
+      .sort({ index: 1 });
+
+    return nextExercise;
+  }
 }
 
 export const exerciseService = new ExerciseService();
