@@ -82,6 +82,59 @@ const fetchNextExercise = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getExercisesByChapterId = catchAsync(
+  async (req: Request, res: Response) => {
+    const chapterId = req.params.chapterId;
+    const result = await exerciseService.getExercisesByChapterId(chapterId);
+
+    if (!result) {
+      return sendResponse(res, {
+        statusCode: httpStatus.NOT_FOUND,
+        success: false,
+        data: null,
+        message: 'No exercises found for this chapter',
+      });
+    }
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      data: result,
+      message: 'All exercises  fetched successfully for this chapter',
+    });
+  },
+);
+
+const getStudentExercisesByChapterAndStudentId = catchAsync(
+  async (req: Request, res: Response) => {
+    const chapterId = req.params.chapterId;
+    const studentId = req.params.studentId;
+
+    const result =
+      await exerciseService.getStudentExercisesByChapterAndStudentId(
+        studentId,
+        chapterId,
+      );
+
+    if (!result) {
+      return sendResponse(res, {
+        statusCode: httpStatus.NOT_FOUND,
+        success: false,
+        data: null,
+        message: 'No exercises found for this chapter and student',
+      });
+    }
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      data: result,
+      message:
+        'All exercises  fetched successfully for this chapter and student',
+    });
+  },
+);
+
 export const ExerciseController = {
   createExercise,
   updateExercise,
@@ -89,4 +142,6 @@ export const ExerciseController = {
   getExerciseById,
   getAllExercises,
   fetchNextExercise,
+  getExercisesByChapterId,
+  getStudentExercisesByChapterAndStudentId,
 };
