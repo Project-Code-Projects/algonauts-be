@@ -19,6 +19,12 @@ const BeginnerLevelSchema = new Schema<IBeginnerLevel, BeginnerModel>(
       type: Schema.Types.ObjectId,
       ref: 'Exercise',
       required: true,
+      unique: true,
+    },
+    chapterId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Chapter',
+      required: true,
     },
     player: { type: CoordinatesSchema, required: true },
     spacecraft: { type: CoordinatesSchema, required: true },

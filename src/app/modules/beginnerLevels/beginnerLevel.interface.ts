@@ -16,6 +16,7 @@ export interface IBeginnerLevel extends Document {
   allowedButtons: string[];
   name: string;
   exerciseId: ObjectId;
+  chapterId: ObjectId;
 }
 
 export type BeginnerModel = Model<IBeginnerLevel, Record<string, unknown>>;
