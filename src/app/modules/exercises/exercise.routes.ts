@@ -9,9 +9,15 @@ router.post('/create', ExerciseController.createExercise);
 // Read
 router.get('/', ExerciseController.getAllExercises);
 router.get('/:id', ExerciseController.getExerciseById);
+router.get('/chapter/:chapterId', ExerciseController.getExercisesByChapterId);
+
 router.get(
   '/fetchNextExercise/:exerciseId',
   ExerciseController.fetchNextExercise,
+);
+router.get(
+  '/:studentId/:chapterId',
+  ExerciseController.getStudentExercisesByChapterAndStudentId,
 );
 
 // Update
