@@ -4,6 +4,7 @@ import routes from './app/routes';
 import httpStatus from 'http-status';
 import cookieParser from 'cookie-parser';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
+// import axios from 'axios';
 
 const app: Application = express();
 
@@ -20,6 +21,18 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/v1', routes);
+
+// app.get('/api/turn-credentials', async (req, res) => {
+//   try {
+//     const response = await axios.post('https://yoursubdomain.metered.live/api/v1/turn/credentials', {
+//       apiKey: process.env.METERED_API_KEY,
+//     });
+//     res.json(response.data);
+//   } catch (error) {
+//     console.error('Error fetching TURN credentials:', error);
+//     res.status(500).json({ error: 'Failed to fetch TURN credentials' });
+//   }
+// });
 
 // Handle root route
 app.get('/', (req: Request, res: Response) => {
